@@ -1,0 +1,100 @@
+/* ------- Estilo de Tablas -------------*/
+
+.contenedorTabla {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f1f1f1;
+}
+
+table {
+  margin: auto;
+  border-collapse: collapse;
+  width: 400px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #3a3a3b;
+}
+
+th {
+  text-align: center;
+  background-color: #1823bd;
+  color: #fafafa;
+}
+
+tr,
+td {
+  text-align: center;
+  padding: 8px;
+  border: 1px solid #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.buttonGpio {
+  padding: 2px 2px;
+  border: none;
+  border-radius: 8px;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 5px #3a3a3b;
+}
+
+/* ------- Panel Styles -------------*/
+.panel {
+  height: auto;
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  background-color: #f6f8fa;
+  border-top: 1px solid #d1d5da;
+  padding: 10px;
+}
+
+.panel input {
+  flex: 1;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.panel button {
+  padding: 4px 14px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 8px;  
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.panel button:hover {
+  background-color: #23863e;
+}
+
+.panel #clear {
+  margin-left: 10px;
+  background-color: #d73a49;
+}
+
+.panel #clear:hover {
+  background-color: #b22d37;
+}
+
+/* ------- General Styles -------------*/
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
