@@ -1,5 +1,8 @@
 const socket = io();
 const label_temp = document.querySelector("#label_temp");
+const label_uptime = document.querySelector("#label_uptime");
+const label_freeram = document.querySelector("#label_freeram");
+const label_totalram = document.querySelector("#label_totalram");
 const buttons = [
     document.querySelector("#button_g16"),
     document.querySelector("#button_g20"),
@@ -17,6 +20,9 @@ socket.on('server_handshake', () => {
 
 socket.on('server_message', (data) => {
     label_temp.textContent = data.temp + '°C';
+    label_uptime.textContent = data.uptime;
+    label_freeram.textContent = data.freeram + ' MB';
+    label_totalram.textContent = data.totalram + ' MB';
     data.pin36 ? setGreen(buttons[0]) : setRed(buttons[0]);
     data.pin38 ? setGreen(buttons[1]) : setRed(buttons[1]);
     data.pin40 ? setGreen(buttons[2]) : setRed(buttons[2]);

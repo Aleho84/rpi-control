@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 const SECRET_STRING = 'secretcookiestring';
 const TIME_SESSION = 1; //Tiempo en lo que expira una session en horas
 const PORT = 80;
-const PROTOCOL = http;
+const PROTOCOL = 'http';
 
 const app = express();
 const httpServer = http.createServer(app);

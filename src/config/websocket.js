@@ -1,15 +1,17 @@
+import os from 'os';
+import { secondsToString, bytesToMegabytes } from '../utils/functions.js';
 import { Raspy } from '../modules/rpio-control.js';
 export const raspy = new Raspy();
 
 export default (ioServer) => {
-    ioServer.on('connection', (socket) => {
-        const cookie = cookieParser(socket.request.headers.cookie);
+    ioServer.on('connection', (socket) => {        
+        const socketID = socket.id;
         const clientIP = socket.conn.remoteAddress;
 
         socket.emit(`server_handshake`);
 
         socket.on('client_handshake', () => {
-            console.log(`[WEBSOKET]:📱 Cliente [${cookie.sid}] conectado IP: ${clientIP}`);
+            console.log(`[WEBSOKET]:📱 Cliente [${socketID}] conectado IP: ${clientIP}`);
             getRapsyValues()
                 .then(raspiData => {
                     socket.emit('server_message', raspiData);
@@ -28,7 +30,7 @@ export default (ioServer) => {
         });
 
         socket.on('disconnect', () => {
-            console.log(`[WEBSOKET]:📱 Cliente [${cookie.sid}] desconectado`);
+            console.log(`[WEBSOKET]:📱 Cliente [${socketID}] desconectado`);
         });
     });
 };
@@ -39,6 +41,9 @@ async function getRapsyValues() {
     try {
         const raspyValues = {
             temp: await raspy.getRaspyTemp(),
+            uptime : secondsToString(os.uptime()),
+            freeram : parseInt(bytesToMegabytes(os.freemem())),
+            totalram : parseInt(bytesToMegabytes(os.totalmem())),
             pin36: await raspy.readGpio(36),
             pin38: await raspy.readGpio(38),
             pin40: await raspy.readGpio(40),
