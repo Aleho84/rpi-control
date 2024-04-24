@@ -7,6 +7,7 @@ const buttons = [
     document.querySelector("#button_g16"),
     document.querySelector("#button_g20"),
     document.querySelector("#button_g21"),
+    document.querySelector("#button_g26"),
 ];
 
 setInterval(function () {
@@ -23,9 +24,10 @@ socket.on('server_message', (data) => {
     label_uptime.textContent = data.uptime;
     label_freeram.textContent = data.freeram + ' MB';
     label_totalram.textContent = data.totalram + ' MB';
-    data.pin36 ? setGreen(buttons[0]) : setRed(buttons[0]);
+    data.pin36 ? setGreen(buttons[0]) : setRed(buttons[0]);    
     data.pin38 ? setGreen(buttons[1]) : setRed(buttons[1]);
     data.pin40 ? setGreen(buttons[2]) : setRed(buttons[2]);
+    data.pin37 ? setGreen(buttons[3]) : setRed(buttons[3]);
 });
 
 //Event Listeners
@@ -42,6 +44,11 @@ buttons[1].addEventListener('click', (event) => {
 buttons[2].addEventListener('click', (event) => {
     (buttons[2].textContent === 'ON') ? setGreen(buttons[2]) : setRed(buttons[2]);
     socket.emit('client_message', { pin: 40 })
+})
+
+buttons[3].addEventListener('click', (event) => {
+    (buttons[3].textContent === 'ON') ? setGreen(buttons[3]) : setRed(buttons[3]);
+    socket.emit('client_message', { pin: 37 })
 })
 
 // Helpers

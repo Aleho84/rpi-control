@@ -45,6 +45,7 @@ async function getRapsyValues() {
             freeram : parseInt(bytesToMegabytes(os.freemem())),
             totalram : parseInt(bytesToMegabytes(os.totalmem())),
             pin36: await raspy.readGpio(36),
+            pin37: await raspy.readGpio(37),
             pin38: await raspy.readGpio(38),
             pin40: await raspy.readGpio(40),
         };

@@ -6,6 +6,7 @@ export class Raspy {
         this.rpioInit();
         this._rpioValues = {
             pin36: false,
+            pin37: false,
             pin38: false,
             pin40: false
         }
@@ -36,6 +37,7 @@ export class Raspy {
         try {
             rpio.open(36, rpio.OUTPUT, rpio.LOW);
             rpio.open(38, rpio.OUTPUT, rpio.LOW);
+            rpio.open(37, rpio.OUTPUT, rpio.LOW);
             rpio.open(40, rpio.OUTPUT, rpio.LOW);
         } catch (error) {
             return { error };
@@ -45,13 +47,22 @@ export class Raspy {
     switchGpio(pin) {
         try {
             pin = Number(pin);
-            const pinValid = [36, 38, 40];
+            const pinValid = [36, 37, 38, 40];
             if (!pinValid.includes(pin)) throw Error(`Invalid GPIO Pin ${pin}`);
 
             switch (pin) {
                 case 36:
                     this._rpioValues.pin36 = !this._rpioValues.pin36;
                     if (this._rpioValues.pin36) {
+                        rpio.write(pin, rpio.HIGH);
+                    } else {
+                        rpio.write(pin, rpio.LOW);
+                    }
+                    break;
+
+                case 37:
+                    this._rpioValues.pin37 = !this._rpioValues.pin37;
+                    if (this._rpioValues.pin37) {
                         rpio.write(pin, rpio.HIGH);
                     } else {
                         rpio.write(pin, rpio.LOW);
@@ -86,7 +97,7 @@ export class Raspy {
 
     activateGpio(pin) {
         try {
-            const pinValid = [36, 38, 40];
+            const pinValid = [36, 37, 38, 40];
             if (!pinValid.includes(pin)) throw Error(`Invalid GPIO Pin ${pin}`);
             rpio.write(pin, rpio.HIGH);
 
@@ -97,7 +108,7 @@ export class Raspy {
 
     deactivateGpio(pin) {
         try {
-            const pinValid = [36, 38, 40];
+            const pinValid = [36, 37, 38, 40];
             if (!pinValid.includes(pin)) throw Error(`Invalid GPIO Pin ${pin}`);
             rpio.write(pin, rpio.LOW);
 
@@ -108,7 +119,7 @@ export class Raspy {
 
     readGpio(pin) {
         try {
-            const pinValid = [36, 38, 40];
+            const pinValid = [36, 37, 38, 40];
             if (!pinValid.includes(pin)) throw Error(`Invalid GPIO Pin ${pin}`);
             const lectura = rpio.read(pin);
             return lectura;
