@@ -9,7 +9,8 @@ export class Raspy {
             pin37: false,
             pin38: false,
             pin40: false
-        }
+        };
+        this.intervalBuzzer = null;
     }
 
     get rpioValues() {
@@ -127,5 +128,28 @@ export class Raspy {
             return { error };
         }
     }
-}
 
+    async buzzerStartBeep() {
+        try {
+            this.buzzerStopBeep()
+                .then(() => {
+                    this.intervalBuzzer = setInterval(() => {
+                        rpio.write(37, rpio.HIGH);
+                        setTimeout(() => {
+                            rpio.write(37, rpio.LOW);
+                        }, 100);
+                    }, 5000);
+                });
+        } catch (error) {
+            return { error };
+        }
+    }
+
+    async buzzerStopBeep() {
+        try {
+            clearInterval(this.intervalBuzzer);
+        } catch (error) {
+            return { error };
+        }
+    }
+}

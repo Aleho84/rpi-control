@@ -8,6 +8,8 @@ import {
     getGpioSetGreen,
     getGpioSetYellow,
     getGpioSetRed,
+    getBuzzerOn,
+    getBuzzerOff,
 } from '../controllers/indexController.js';
 
 indexRouter.get('/', getIndexPage);
@@ -16,5 +18,7 @@ indexRouter.get('/api/switchGpio', getSwitchGpio);
 indexRouter.get('/api/gpioSetGreen', getGpioSetGreen);
 indexRouter.get('/api/gpioSetYellow', getGpioSetYellow);
 indexRouter.get('/api/gpioSetRed', getGpioSetRed);
+indexRouter.get('/api/buzzerOn', getBuzzerOn);
+indexRouter.get('/api/buzzerOff', getBuzzerOff);
 
 export default indexRouter;
