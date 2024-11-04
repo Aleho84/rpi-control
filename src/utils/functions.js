@@ -22,3 +22,12 @@ export const bytesToMegabytes = function (bytes) {
         return { error: `${error}` };
     };
 };
+
+//Funcion para validar si un string es IP
+export const isValidIP = function(ipAddress) {
+    // Regular expression to match an IPv4 address
+    const ipv4Regex = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  
+    // Test the input string against the regular expression
+    return ipv4Regex.test(ipAddress);
+  };  

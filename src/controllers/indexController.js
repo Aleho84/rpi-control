@@ -1,9 +1,10 @@
-import packageJson from '../../package.json' assert {type: "json"};
 import { raspy } from '../config/websocket.js'
+
+const webTitle = 'RPI-CONTROL'
 
 export const getIndexPage = async (req, res) => {
     try {
-        res.render('index', { title: packageJson.name.toUpperCase() });
+        res.render('index', { title: webTitle });
     } catch (error) {
         res.render('error', { message: error.message, error: error });
     };

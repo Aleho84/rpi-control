@@ -2,24 +2,36 @@ import 'dotenv/config';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import http from 'http';
+import https from 'https';
+import fs from 'fs';
 import { Server as socketio } from "socket.io";
 import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
+import session from 'cookie-session';
 import indexRouter from './routes/indexRoutes.js';
 import websockets from './config/websocket.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SECRET_STRING = 'secretcookiestring';
-const TIME_SESSION = 1; //Tiempo en lo que expira una session en horas
-const PORT = 80;
-const PROTOCOL = 'http';
+const privateKey = fs.readFileSync(process.env.PRIVATE_KEY, 'utf8');
+const certificate = fs.readFileSync(process.env.CERTIFICATE, 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+const SECRET_STRING = process.env.SECRET_STRING;
+const TIME_SESSION = process.env.TIME_SESSION; //Tiempo en lo que expira una session en horas
+const PORT = process.env.PORT;
+const PROTOCOL = process.env.PROTOCOL;
 
 const app = express();
-const httpServer = http.createServer(app);
+let httpServer;
+if (PROTOCOL == 'https') {
+    httpServer = https.createServer(credentials, app);
+} else {
+    httpServer = http.createServer(app);
+}
+
 const ioServer = new socketio(httpServer, {
     cors: {
         origin: "*",
@@ -40,7 +52,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         httpOnly: true,
-        secure: false,
+        secure: true,
         maxAge: 1000 * 60 * 60 * TIME_SESSION
     },
     secret: SECRET_STRING,

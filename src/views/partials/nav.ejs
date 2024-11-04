@@ -15,9 +15,15 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> API Preset </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li> <a class="dropdown-item" href="/api/gpioSetGreen">Green Led</a> </li>
-            <li> <a class="dropdown-item" href="/api/gpioSetYellow">Yellow Led</a> </li>
-            <li> <a class="dropdown-item" href="/api/gpioSetRed">Red Led</a> </li>
+            <li> <a class="dropdown-item" href="/api/gpio_status">GPIO Status</a> </li>
+            <li> <a class="dropdown-item" href="/api/switchGpio?pin=36">Switch GPIO</a> </li>
+            <li><hr class="dropdown-divider"></li>
+            <li> <a class="dropdown-item" href="/api/gpioSetGreen">Green Led On</a> </li>
+            <li> <a class="dropdown-item" href="/api/gpioSetYellow">Yellow Led On</a> </li>
+            <li> <a class="dropdown-item" href="/api/gpioSetRed">Red Led On</a> </li>
+            <li><hr class="dropdown-divider"></li>          
+            <li> <a class="dropdown-item" href="/api/buzzerOn">Buzzer On</a> </li>
+            <li> <a class="dropdown-item" href="/api/buzzerOff">BuzzerOff</a> </li>
           </ul>
         </li>
       </ul>

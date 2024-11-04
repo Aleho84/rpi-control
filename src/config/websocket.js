@@ -29,6 +29,10 @@ export default (ioServer) => {
             }
         });
 
+        socket.on('add_ip', (data) => {
+            console.log(data);
+        });
+
         socket.on('disconnect', () => {
             console.log(`[WEBSOKET]:📱 Cliente [${socketID}] desconectado`);
         });
