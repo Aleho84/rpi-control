@@ -23,6 +23,18 @@ socket.on('server_handshake', () => {
 
 socket.on('server_message', (data) => {
     label_temp.textContent = data.temp + '°C';
+    
+    if (data.temp > 60) {
+        label_temp.style.backgroundColor = 'red';
+        label_temp.style.color = 'white'; // Ensure text is readable on red
+    } else if (data.temp >= 50 && data.temp <= 60) {
+        label_temp.style.backgroundColor = 'yellow';
+        label_temp.style.color = 'black'; // Ensure text is readable on yellow
+    } else {
+        label_temp.style.backgroundColor = 'lightblue'; // Default color
+        label_temp.style.color = 'black';
+    }
+
     label_uptime.textContent = data.uptime;
     label_freeram.textContent = data.freeram + ' MB';
     label_totalram.textContent = data.totalram + ' MB';
@@ -51,11 +63,6 @@ buttons[2].addEventListener('click', (event) => {
 buttons[3].addEventListener('click', (event) => {
     (buttons[3].textContent === 'ON') ? setGreen(buttons[3]) : setRed(buttons[3]);
     socket.emit('client_message', { pin: 37 })
-})
-
-buttons[4].addEventListener('click', (event) => {
-    const addIP = input_ip.value;
-    socket.emit('add_ip', { addIP })
 })
 
 // Helpers
